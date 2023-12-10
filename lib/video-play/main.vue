@@ -1,10 +1,5 @@
-/*
- * @Author: web.王晓冬
- * @Date: 2020-11-03 16:29:47
- * @LastEditors: itab.link
- * @LastEditTime: 2023-11-09 15:50:42
- * @Description: file content
-*/
+/* * @Author: web.王晓冬 * @Date: 2020-11-03 16:29:47 * @LastEditors: itab.link
+* @LastEditTime: 2023-11-09 15:50:42 * @Description: file content */
 
 <template>
   <div
@@ -88,6 +83,7 @@
     <!-- 预加载动画 -->
     <d-loading :loadType="state.loadStateType" />
     <d-contextmenu />
+    <slot></slot>
     <!-- PC端播放按钮控制器  移动端调用自带控制器-->
     <div
       class="d-player-control"
@@ -121,6 +117,7 @@
           </div>
         </div>
         <div class="d-tool-bar">
+          <slot name="tool-bar-start"></slot>
           <!-- 清晰度 -->
           <div
             class="d-tool-item quality-btn"
@@ -219,6 +216,7 @@
                   关灯模式
                   <d-switch @change="lightOffChange" v-model="state.lightOff" />
                 </li>
+                <slot name="setting-items"></slot>
               </ul>
             </div>
           </div>
@@ -249,6 +247,7 @@
             <div class="d-tool-item-main">全屏</div>
             <d-icon size="20" icon="icon-screen"></d-icon>
           </div>
+          <slot name="tool-bar-end"></slot>
         </div>
       </div>
     </div>
@@ -457,14 +456,14 @@ const playHandle = () => {
   //首次播放会报错：DOMException: The play() request was interrupted by a new load request.
   state.dVideo.play().catch(() => {
     //处理无缓冲报错问题
-    state.dVideo.load()
+    state.dVideo.load();
     setTimeout(() => {
       state.dVideo.play().catch(() => {
         //如果依然报错，则显示错误状态。
         state.playBtnState = "replay";
         state.loadStateType = "error";
-      })
-    },200)
+      });
+    }, 200);
   });
   state.playBtnState = "pause";
   // 播放后清空状态
@@ -620,7 +619,6 @@ defineExpose({
 });
 </script>
 
-
 <style lang="less" scoped>
 @import "../style/reset.less";
 @import "../style/transition.less";
@@ -633,3 +631,4 @@ defineExpose({
 }
 @import "../style/vPlayer.less";
 </style>
+

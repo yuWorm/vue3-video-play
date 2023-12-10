@@ -1,10 +1,5 @@
-/*
- * @Author: web.王晓冬
- * @Date: 2021-08-20 19:10:57
- * @LastEditors: itab.link
- * @LastEditTime: 2023-11-09 15:38:31
- * @Description: file content
-*/
+/* * @Author: web.王晓冬 * @Date: 2021-08-20 19:10:57 * @LastEditors: itab.link
+* @LastEditTime: 2023-11-09 15:38:31 * @Description: file content */
 <template>
   <!-- <div style="height:150px; margin-top:100px">
     <d-slider v-model="options.volume"></d-slider>
@@ -20,7 +15,17 @@
       ref="video"
       style="display: inline-block; width: 100%"
       v-bind="options"
-    />
+    >
+      <h1>测试插槽</h1>
+      <template #tool-bar-start>
+        <button>工具栏前部</button>
+      </template>
+      <template #setting-items>
+        <li>
+          <button>工具栏前部</button>
+        </li>
+      </template>
+    </videoPlay>
   </div>
 </template>
 
@@ -65,5 +70,4 @@ nextTick(() => {
 });
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
