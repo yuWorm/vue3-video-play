@@ -31,8 +31,8 @@ export default defineConfig({
     },
     lib: {
       entry: "./lib/index.js",
-      name: "index",
-      fileName: "index",
+      name: "vue3-video-play",
+      fileName: "vue3-video-play",
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖

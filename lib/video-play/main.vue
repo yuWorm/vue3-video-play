@@ -255,7 +255,7 @@
 </template>
 <script lang="ts">
 export default {
-  name: "vue3VideoPlay",
+  name: "Vue3VideoPlay",
   inheritAttrs: false,
 };
 </script>
