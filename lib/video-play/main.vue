@@ -190,8 +190,8 @@
                   state.volume == 0 || state.muted
                     ? 'mute'
                     : state.volume > 0.5
-                    ? 'up'
-                    : 'down'
+                      ? 'up'
+                      : 'down'
                 }`"
               ></d-icon>
             </span>
@@ -286,6 +286,7 @@ const emits = defineEmits([
   "mirrorChange",
   "loopChange",
   "lightOffChange",
+  "mounted"
 ]); //emits
 
 const refPlayerWrap: Ref<HTMLElement> = ref(null); //wrap
@@ -558,7 +559,7 @@ const toggleFullScreenHandle = () => {
 const init = (): void => {
   if (!state.dVideo.canPlayType(props.type)) {
     console.error(
-      "vue3-video-play: Format not supported,Check the [type] parameter"
+      "vue3-video-play: Format not supported,Check the [type] parameter",
     );
   }
   if (
@@ -606,13 +607,15 @@ watch(
       init();
     });
   },
-  { immediate: true }
+  { immediate: true },
 );
 onMounted(() => {
   state.dVideo = refdVideo;
   inputFocusHandle();
+  emits("mounted", state.dVideo)
 });
 defineExpose({
+  video: state.dVideo,
   play: playHandle, //播放
   pause: pauseHandle, //暂停
   togglePlay, //暂停或播放
@@ -631,4 +634,3 @@ defineExpose({
 }
 @import "../style/vPlayer.less";
 </style>
-
