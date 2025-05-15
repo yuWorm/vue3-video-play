@@ -190,8 +190,8 @@
                   state.volume == 0 || state.muted
                     ? 'mute'
                     : state.volume > 0.5
-                      ? 'up'
-                      : 'down'
+                    ? 'up'
+                    : 'down'
                 }`"
               ></d-icon>
             </span>
@@ -204,15 +204,15 @@
             <d-icon size="20" class="rotateHover" icon="icon-settings"></d-icon>
             <div class="d-tool-item-main">
               <ul class="speed-main">
-                <li>
+                <li v-if="props.settingItems.includes('mirror')">
                   镜像画面
                   <d-switch @change="mirrorChange" v-model="state.mirror" />
                 </li>
-                <li>
+                <li v-if="props.settingItems.includes('loop')">
                   循环播放
                   <d-switch @change="loopChange" v-model="state.loop" />
                 </li>
-                <li>
+                <li v-if="props.settingItems.includes('ligthOff')">
                   关灯模式
                   <d-switch @change="lightOffChange" v-model="state.lightOff" />
                 </li>
@@ -286,7 +286,7 @@ const emits = defineEmits([
   "mirrorChange",
   "loopChange",
   "lightOffChange",
-  "mounted"
+  "mounted",
 ]); //emits
 
 const refPlayerWrap: Ref<HTMLElement> = ref(null); //wrap
@@ -559,7 +559,7 @@ const toggleFullScreenHandle = () => {
 const init = (): void => {
   if (!state.dVideo.canPlayType(props.type)) {
     console.error(
-      "vue3-video-play: Format not supported,Check the [type] parameter",
+      "vue3-video-play: Format not supported,Check the [type] parameter"
     );
   }
   if (
@@ -607,12 +607,12 @@ watch(
       init();
     });
   },
-  { immediate: true },
+  { immediate: true }
 );
 onMounted(() => {
   state.dVideo = refdVideo;
   inputFocusHandle();
-  emits("mounted", state.dVideo)
+  emits("mounted", state.dVideo);
 });
 defineExpose({
   video: state.dVideo,
